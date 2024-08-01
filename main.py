@@ -8,7 +8,7 @@ st.set_page_config(
 
 @st.cache_data
 def GetExcelData():
-    df = pd.read_excel(r"C:\Users\roylo\OneDrive\Documentos\Data Science\Proyectos\Sales-Dashboard-Streamlit\src\Datasets\supermarkt_sales.xlsx", engine='openpyxl',skiprows=3, usecols='B:R')
+    df = pd.read_excel(r"Datasets/supermarkt_sales.xlsx", engine='openpyxl',skiprows=3, usecols='B:R')
     df['Hour'] = pd.to_datetime(df['Time'], format='%H:%M:%S').dt.hour
     return df
 
