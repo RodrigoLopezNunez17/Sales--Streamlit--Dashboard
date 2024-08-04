@@ -6,6 +6,10 @@ st.set_page_config(
     layout="wide"
 )
 
+st.logo(
+    "Images/salesStreamlit.jpeg",
+)
+
 def MyanmarLatLon(s : str)->str:
         if s == 'Mandalay':
             return "21.97473,96.08359"
@@ -16,10 +20,7 @@ def MyanmarLatLon(s : str)->str:
 
 @st.cache_data
 def GetExcelData():
-    df = pd.read_excel(r"Datasets/supermarkt_sales.xlsx", engine='openpyxl',skiprows=3, usecols='B:R')
-    df['Hour'] = pd.to_datetime(df['Time'], format='%H:%M:%S').dt.hour
-    df[['Lat', 'Lon']] = df['City'].apply(MyanmarLatLon).str.split(",", expand=True).astype(float)
-
+    df = pd.read_excel(r"Datasets/supermarkt_sales_transformed.xlsx", engine='openpyxl',)
     return df
 
 sales = GetExcelData()
@@ -28,6 +29,9 @@ st.title("Sales Dashboard 🛍️")
 st.markdown("---")
 
 with st.sidebar:
+    st.image(
+        "Images/salesStreamlit.jpeg"
+    )
     st.subheader("Please Filter Here")
 
     cityFilter = st.multiselect(
